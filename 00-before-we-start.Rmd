@@ -13,7 +13,6 @@ knitr::opts_chunk$set(results='hide', fig.path='img/r-lesson-')
 
 > ## Learning Objectives
 >
-> * test test
 > * Articulating motivations for this lesson
 > * Introduce participants to the RStudio interface
 > * Set up participants to have a working directory with a `data/` folder inside
