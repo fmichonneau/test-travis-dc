@@ -5,7 +5,7 @@ sudo: required
 
 env:
   global:
-   - secure: "Ha9NmkMT0qV/j5LKvAnkAGDsSrIZFudaIMIJNd0xy2lePOH89lna5OTU1PnNnaayeMmaarwr5/Cz4WE8ZycGFKJxoErQEfQ2/UvNY+X+wPH1mXUj0XsyBNklE55j2Y5Co6jssFy7sxWEX4fx5cWASu4tSUfmoDUHudBRQ0DkQbo="
+   - secure:   secure: "txiE0uhxAOPiLgTuo5eWkn80bIJ126TTO2jjoBI00CyVuU1gCInbvzHwPmc9R9bOTOlc6j25dU5/p1c2/jFU+KaTsCXpaLVIYjAStuAJLQe4NE7bj/zuhQb1au+V6FZbOXHDxy1PIq4haiGtE7ReON609QPbPnbjTwiTrvexmfpvZ/wu+dRvg3mWTfu7fsH6xqFRHPP6/mESaf2AT3DTdM34sOhXydGhFk/39L+rtPMKhfhr8fbLsVtOrDPqoI3HY+IMGxGH7YUjmKasEFosOAJiUkqO9yWyIpZXouqNWiDozBCvsU5jEL7CUBHBZpSAIN597NpS7QFgGyP3XBXuKy6WhFyYXec2AKzu+iTZBdOTndKCfdm9XLJjVPGZi0OK0lVnZs4wwmG+eWzT4BCOhzaxSGmExvnQCGE0htsNL2DIS3Q16OH5j5A/ehTEofFxe5DJ2T2445NB3SJxI4OiPx4S0oWr7KhLANNw44Z2dfDln1yiearxkaddJPUrjB2RkEry5DP+e9hB8IuA/kb5rf2wiyBI7OqY8aWM2SQGUCRYgkphI3SpuAWpqFF+hekO5d2cxas+c0dGYycMkXqsuFf+C7awHOPhiLY/Kn9m8sS9OMJE6AgpE35o6DweT0eh0HNKBr34LQM8gSQHWT4JTOfGt4lOCBKhti97NEtA4V0="
 
 before_install:
   - curl -OL http://raw.github.com/craigcitro/r-travis/master/scripts/travis-tool.sh
@@ -22,9 +22,10 @@ script:
   - make
 
 after_success:
-  - export GH_REPO="@github.com/fmichonneau/test-travis-dc.git"
+  - export NAME_REPO="test-travis-dc"
+  - export GH_REPO="@github.com/fmichonneau/${NAME_REPO}.git"
   - export FULL_REPO="https://${GH_TOKEN}${GH_REPO}"
-  - export APP_DIR="/home/travis/build/fmichonneau/app_dir/test-travis-dc"
+  - export APP_DIR="/home/travis/build/fmichonneau/app_dir/${NAME_REPO}"
   - echo ${FULL_REPO}
   - mkdir -p ${APP_DIR}
   - git clone ${FULL_REPO} ${APP_DIR}
@@ -32,7 +33,8 @@ after_success:
   - git config user.name "fmichonneau"
   - git config user.email "francois.michonneau@gmail.com"
   - git checkout gh-pages
-  - cp /home/travis/build/fmichonneau/test-travis-dc/*.html ${APP_DIR}
+  - cp /home/travis/build/fmichonneau/${NAME_REPO}/*.html ${APP_DIR}
+  - cp /home/travis/build/fmichonneau/${NAME_REPO}/handout-script.R ${APP_DIR}
   - git add *.html
   - git add handout-script.R
   - git commit -m "[travis] update html pages + handout"
