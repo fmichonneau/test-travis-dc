@@ -1,0 +1,39 @@
+# Sample .travis.yml for R projects
+
+language: c
+sudo: required
+
+env:
+  global:
+   - secure: "Ha9NmkMT0qV/j5LKvAnkAGDsSrIZFudaIMIJNd0xy2lePOH89lna5OTU1PnNnaayeMmaarwr5/Cz4WE8ZycGFKJxoErQEfQ2/UvNY+X+wPH1mXUj0XsyBNklE55j2Y5Co6jssFy7sxWEX4fx5cWASu4tSUfmoDUHudBRQ0DkQbo="
+
+before_install:
+  - curl -OL http://raw.github.com/craigcitro/r-travis/master/scripts/travis-tool.sh
+  - chmod 755 ./travis-tool.sh
+  - export BOOTSTRAP_PANDOC=1
+  - ./travis-tool.sh bootstrap
+
+install:
+  - ./travis-tool.sh install
+  - ./travis-tool.sh r_binary_install knitr dplyr ggplot2 rmarkdown RSQLite
+
+script:
+  - make clean
+  - make
+
+after_success:
+  - export GH_REPO="@github.com/fmichonneau/test-travis-dc.git"
+  - export FULL_REPO="https://${GH_TOKEN}${GH_REPO}"
+  - export APP_DIR="/home/travis/build/fmichonneau/app_dir/test-travis-dc"
+  - echo ${FULL_REPO}
+  - mkdir -p ${APP_DIR}
+  - git clone ${FULL_REPO} ${APP_DIR}
+  - cd ${APP_DIR}
+  - git config user.name "fmichonneau"
+  - git config user.email "francois.michonneau@gmail.com"
+  - git checkout gh-pages
+  - cp /home/travis/build/fmichonneau/test-travis-dc/*.html ${APP_DIR}
+  - git add *.html
+  - git add handout-script.R
+  - git commit -m "[travis] update html pages + handout"
+  - git push ${FULL_REPO} HEAD:gh-pages
