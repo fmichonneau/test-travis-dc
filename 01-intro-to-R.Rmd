@@ -48,6 +48,7 @@ You can get output from R simply by typing in math in the console
 3 + 5
 12/7
 5+5
+9 * 9 + 2 + 3
 ```
 
 However, to do useful and interesting things, we need to assign _values_ to
