@@ -47,6 +47,7 @@ You can get output from R simply by typing in math in the console
 ```{r, purl=FALSE}
 3 + 5
 12/7
+1 + 2 + 3 + 4 + 5
 ```
 
 However, to do useful and interesting things, we need to assign _values_ to
