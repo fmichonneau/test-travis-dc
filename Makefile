@@ -7,8 +7,8 @@ skeleton-%.R: %.Rmd
 %.html: %.Rmd
 	Rscript -e "rmarkdown::render('$<', output_format=rmarkdown::html_document(toc=TRUE, highlight='tango'))"
 
-index.html: index.md
-	pandoc -o $@ $^
+#index.html: index.md
+#	pandoc -o $@ $^
 
 motivation.html: motivation.md
 	pandoc -o $@ $^
