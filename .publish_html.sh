@@ -1,6 +1,7 @@
 #!/bin/bash
 
-test "${TRAVIS_PULL_REQUEST}" != 'false' && (echo "we don't publish PR"; exit 0)
+test "${TRAVIS_PULL_REQUEST}" != 'false'  && (echo "we don't publish PR"; exit 0)
+test "${TRAVIS_BRANCH}" != 'master' && (echo "we only publish master"; exit 0)
 
 
 echo ${FULL_REPO}
