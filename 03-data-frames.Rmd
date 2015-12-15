@@ -68,7 +68,7 @@ str(example_data)
 ### Challenge
 
 1. There are a few mistakes in this hand crafted `data.frame`, can you spot and
-fix them? Don't hesitate to experiment!
+fix them? Don't hesitate to experiment! See what works.
 
     ```
     author_book <- data.frame(author_first=c("Charles", "Ernst", "Theodosius"),
